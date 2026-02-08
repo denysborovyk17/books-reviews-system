@@ -4,6 +4,7 @@
     $username = "root";
     $password = "";
 
+    // Підключаємо БД та відловлюємо помилки
     try {
         $pdo = new PDO(
             "mysql:host=$host;dbname=$dbname;charset=utf8mb4",

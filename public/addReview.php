@@ -7,6 +7,7 @@
 /** @var $reviewsByBook */
 require __DIR__ . '/../db.php';
 
+// Додаємо відгук користувача
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $bookId = (int)($_POST['book_id']);
     $rating = (int)($_POST['rating']);
