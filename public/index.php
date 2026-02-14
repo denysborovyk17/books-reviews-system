@@ -24,7 +24,7 @@
         <?= htmlspecialchars($book['author']) ?> (<?= $book['year'] ?>)
 
         <?php if ($book['image_path']): ?>
-            <img src="../uploads/books/<?= $book['image_path'] ?>" width="120">
+            <img src="../uploads/<?= $book['image_path'] ?>" width="100" height="150">
         <?php endif; ?>
 
         <h4>Reviews</h4>

@@ -38,7 +38,7 @@
                 <input name="year" value="<?= htmlspecialchars($book['year']) ?>" required>
 
                 <?php if($book['image_path']): ?>
-                    <img src="../uploads/books/<?= $book['image_path'] ?>" width="60">
+                    <img src="../uploads/<?= $book['image_path'] ?>" width="100" height="150">
                 <?php endif; ?>
 
                 <input type="file" name="image" accept="image/*">
@@ -55,7 +55,7 @@
                 Автор: <?= htmlspecialchars($book['author']) ?> |
                 Рік: <?= $book['year'] ?> |
                 <?php if ($book['image_path']): ?>
-                    <img src="../uploads/books/<?= $book['image_path'] ?>" width="60">
+                    <img src="../uploads/<?= $book['image_path'] ?>" width="100" height="150">
                 <?php endif; ?>
             </span>
 

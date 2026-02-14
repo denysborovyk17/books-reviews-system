@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($_FILES['image']['name'])) {
             $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
             $imagePath = uniqid() . '.' . $ext;
-            if (!move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/../uploads/books/' . $imagePath)) {
+            if (!move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/../uploads' . $imagePath)) {
                 die('Upload failed');
             }
         } else {
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($_FILES['image']['name'])) {
             $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
             $imagePath = uniqid() . '.' . $ext;
-            move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/../uploads/books/' . $imagePath);
+            move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/../uploads/' . $imagePath);
 
             if ($id && $title && $author && $year) {
                 $stmt = $pdo->prepare("UPDATE books SET title = :title, author = :author, year = :year, image_path = :image_path WHERE id = :id");
