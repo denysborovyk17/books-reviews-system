@@ -14,6 +14,12 @@
         $username = trim($_POST['username']);
         $text = trim($_POST['text']);
 
+        if (empty($username)) {
+            die("Ім'я обов'язкове");
+        } elseif (strlen($text) < 2) {
+            die("Опис до відгуку має бути більше 2 символів");
+        }
+
         if ($bookId && $username && $text && $rating >= 1 && $rating <= 5) {
             $stmt = $pdo->prepare("INSERT INTO reviews (book_id, username, text, rating) VALUES (:book_id, :username, :text, :rating)");
             $stmt->execute([
