@@ -14,6 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $author = trim($_POST['author']);
         $year = trim($_POST['year']);
 
+        if (strlen($title) < 2) {
+            die('Назва повинна бути більше 2 символів');
+        } elseif (empty($author)) {
+            die("Автор обов'язковий");
+        } elseif (empty($year)) {
+            die("Рік обов'язковий");
+        }
+
         if (!empty($_FILES['image']['name'])) {
             $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
             $imagePath = uniqid() . '.' . $ext;
@@ -50,25 +58,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
             $imagePath = uniqid() . '.' . $ext;
             move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/../uploads/' . $imagePath);
+        }
 
-            if ($id && $title && $author && $year) {
-                $stmt = $pdo->prepare("UPDATE books SET title = :title, author = :author, year = :year, image_path = :image_path WHERE id = :id");
-                $stmt->execute([
-                    'title'  => $title,
-                    'author' => $author,
-                    'year'   => $year,
-                    'image_path' => $imagePath,
-                    'id' => $id
-                ]);
-            } else {
-                $stmt = $pdo->prepare("UPDATE books SET title = :title, author = :author, year = :year WHERE id = :id");
-                $stmt->execute([
-                    'title' => $title,
-                    'author'=> $author,
-                    'year'  => $year,
-                    'id'    => $id
-                ]);
-            }
+        if ($id && $title && $author && $year) {
+            $stmt = $pdo->prepare("UPDATE books SET title = :title, author = :author, year = :year, image_path = :image_path WHERE id = :id");
+            $stmt->execute([
+                'title'  => $title,
+                'author' => $author,
+                'year'   => $year,
+                'image_path' => $imagePath,
+                'id' => $id
+            ]);
+        } else {
+            $stmt = $pdo->prepare("UPDATE books SET title = :title, author = :author, year = :year WHERE id = :id");
+            $stmt->execute([
+                'title' => $title,
+                'author'=> $author,
+                'year'  => $year,
+                'id'    => $id
+            ]);
         }
         header('Location: index.php');
         exit;
